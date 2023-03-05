@@ -1,13 +1,13 @@
 #-------- push_swap --------#
 NAME	=	push_swap
-SRC		=	push_swap.c
+SRC		=	push_swap.c push_swap_prep.c init_stack.c actions.c error.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#
 LIBFT	=	./libft/libft.a
 
 #---------- other ----------#
-CFLAGS	=	-Wall -Wextra -Werror
+//CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
 #---------- rules ----------#

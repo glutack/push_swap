@@ -6,53 +6,62 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/02/13 18:54:02 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:16:58 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*arg str to int*/
-/*Checks if is digit, argument > int or duplicated numbers*/
-int	ft_check_arg(char *num)
+void	ft_check_index(t_program *ps)
 {
-	int	i;
+	if (ps->a->index > ps->a->next->index && ps->a->index > ps->a->next->next->index)
+		ps->a = ft_ra(ps);
+	//else if (ps->a->next->index > (ps->a->index && ps->a->next->next->index))
+	else if (ps->a->index > ps->a->next->index)
+		ps->a = ft_swap_a(ps);
+}
 
-	i = 0;
-	if (num[i] == '-')
-		i++;
-	while (num[i])
+int	ft_issorted(t_program *ps)
+{
+	ps->i = 1;
+	while (ps->a != NULL)
 	{
-		if (!ft_isdigit(num[i]))
+		if (ps->a->index == ps->i)
+		{
+			ps->a = ps->a->next;
+			ps->i++;
+		}
+		else
+		{
+			ps->a = ps->a_first_node;
 			return (0);
-		i++;
+		}
 	}
+	ps->a = ps->a_first_node;
 	return (1);
 }
 
-long	ft_create_stack()
-{
-	if (!lst->stack_a)
-		write(2, "a", 1);
-	else
-		while (argv[i])
-			lst->stack_a[j++] = argv[i++];
-}
-
+/*If first arg contains all numbers, it splits them into different str, if
+numbers already come as different args it deletes the first one (./push_swap)
+and allocates memory*/
 int	main(int argc, char **argv)
 {
-	int		i;
-	int		j;
-	t_list	lst;
+	t_program	*ps;
 
-	i = 1;
-	j = 0;
-	if (argc == 1)
-		return (0);
-	else
-	
-		lst->stack_a = ft_split(argv[1], '\n');
-	lst->stack_a = malloc(sizeof(long) * (argc - 1));
-	ft_create_stack(argv, &lst);
+	ps = NULL;
+	ps = ft_init_ps(ps);
+	if (argc < 2 || (!ft_ps_prep(ps, argc, argv)))
+		return (1);
+	if (!ft_issorted(ps) && ps->total_index == 2)
+		ps->a = ft_swap_a(ps);
+	if (!ft_issorted(ps) && ps->total_index == 3)
+		ft_check_index(ps);
+	while (ps->a != NULL)
+	{
+		ft_putnbr_fd(ps->a->num, 1);
+		ps->a = ps->a->next;
+	}
+	ft_putstr_fd("tot be\n", 1);
+	free(ps);
 	return (0);
 }
