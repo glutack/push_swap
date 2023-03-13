@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/01 18:16:58 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/12 15:50:02 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!ft_issorted(ps) && ps->total_index == 2)
 		ps->a = ft_swap_a(ps);
-	if (!ft_issorted(ps) && ps->total_index == 3)
+	else if (!ft_issorted(ps) && ps->total_index == 3)
 		ft_check_index(ps);
 	while (ps->a != NULL)
 	{

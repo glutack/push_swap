@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/12 13:57:02 by irmoreno          #+#    #+#             */
+/*   Updated: 2023/03/12 15:30:53 by irmoreno         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*ft_swap_a(t_program *ps)
 {
 	t_stack	*new_node;
+
 	new_node = ps->a->next;
+	ps->a->next = new_node->next;
 	new_node->next = ps->a;
-	new_node->next->next = ps->a->next->next;
 
 	return (new_node);
 }
