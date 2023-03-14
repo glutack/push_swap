@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:43:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/03 12:01:13 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:57:00 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_stack {
 	int				num;
 	int				index;
 	int				pos;
-	int				target_post;
+	int				target_pos;
 	int				cost_a;
 	int				cost_b;
 	struct s_stack	*next;
@@ -29,11 +29,12 @@ typedef struct s_stack {
 
 typedef struct s_program {
 	char			**argv;
-	int				i;
-	int				j;
-	int				total_index;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	total_index;
 	struct s_stack	*aux;
 	struct s_stack	*a_first_node;
+	struct s_stack	*b_first_node;
 	struct s_stack	*a;
 	struct s_stack	*b;
 }				t_program;
@@ -46,8 +47,10 @@ int			ft_ps_prep(t_program *ps, int argc, char **argv);
 t_program	*ft_init_stacka(t_program *ps);
 
 // ACTIONS
-t_stack		*ft_swap_a(t_program *ps);
-t_stack		*ft_ra(t_program *ps);
+t_stack		*ft_swap(t_stack *stack, char c);
+void		*ft_pb(t_program *ps);
+t_stack		*ft_r(t_stack *stack, char c);
+t_stack		*ft_rra(t_stack *stack, char c);
 
 // ERROR
 void		ft_puterr(char *str, t_program *ps, int err);

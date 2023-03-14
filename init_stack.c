@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:53:32 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/03 12:03:24 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/14 12:53:18 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_stack	*ft_find_next_max(t_program *ps, t_stack *max)
 	if (ps->a == NULL)
 	{
 		max->index = ps->i;
+		max->target_pos = ps->j;
+		ps->j--;
 		ps->i--;
 	}
 	else
@@ -43,6 +45,7 @@ static t_program	*ft_put_index(t_program *ps)
 	max = ps->a;
 	max->num = ps->a->num;
 	ps->a = ps->a->next;
+	ps->j = ps->total_index - 1;
 	while (ps->i > 0)
 		max = ft_find_next_max(ps, max);
 	return (ps);
@@ -103,6 +106,7 @@ t_program	*ft_init_stacka(t_program *ps)
 	{
 		ps->a->num = ft_ps_atoi(ps, ps->argv[ps->i]);
 		ps->a->index = 0;
+		ps->a->pos = ps->i;
 		if (ps->argv[ps->i + 1] != NULL)
 		{
 			ps->a->next = (t_stack *)malloc(sizeof(t_stack));
@@ -117,5 +121,6 @@ t_program	*ft_init_stacka(t_program *ps)
 	ps = ft_check_double(ps);
 	ps = ft_put_index(ps);
 	ps->a = ps->a_first_node;
+	ps->b = NULL;
 	return (ps);
 }
