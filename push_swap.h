@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:43:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 12:57:00 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:21:29 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_program {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	total_index;
-	struct s_stack	*aux;
+	struct s_stack	*aux_pos;
 	struct s_stack	*a_first_node;
 	struct s_stack	*b_first_node;
 	struct s_stack	*a;
@@ -42,6 +42,9 @@ typedef struct s_program {
 // PREP
 t_program	*ft_init_ps(t_program *ps);
 int			ft_ps_prep(t_program *ps, int argc, char **argv);
+int			ft_issorted(t_program *ps);
+void		ft_get_pos(t_program *ps);
+void		ft_get_target_pos(t_program *ps);
 
 // INIT STACK
 t_program	*ft_init_stacka(t_program *ps);

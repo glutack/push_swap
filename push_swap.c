@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 12:45:30 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:22:01 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,19 @@ void	ft_sort_small(t_program *ps)
 	ps->a_first_node = ps->a;
 }
 
-int	ft_issorted(t_program *ps)
-{
-	ps->i = 1;
-	while (ps->a != NULL)
-	{
-		if (ps->a->index == ps->i)
-		{
-			ps->a = ps->a->next;
-			ps->i++;
-		}
-		else
-		{
-			ps->a = ps->a_first_node;
-			return (0);
-		}
-	}
-	ps->a = ps->a_first_node;
-	return (1);
-}
-
 void	ft_sort_big(t_program *ps)
 {
 	while (ps->a->next->next->next != NULL)
 		ft_pb(ps);
 	ft_sort_small(ps);
+	ps->aux_pos = ps->a_first_node;
+	ft_get_target_pos(ps);
+	while (ps->b != NULL)
+	{
+		ft_putnbr_fd(ps->a->target_pos, 1);
+		ft_putchar_fd('\n', 1);
+		ps->b = ps->b->next;
+	}
 }
 
 /*If first arg contains all numbers, it splits them into different str, if
