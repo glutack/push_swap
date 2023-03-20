@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:44:44 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/01 18:15:43 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:43:19 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_check_int(t_program *ps, int argc, char **argv)
 	return (1);
 }
 
-//Allocates memory for struct and ps->argv, fills ps->argv
+// allocates memory for struct and ps->argv
 t_program	*ft_init_ps(t_program *ps)
 {
 	ps = (t_program *)malloc(sizeof(t_program));
@@ -47,6 +47,11 @@ t_program	*ft_init_ps(t_program *ps)
 	return (ps);
 }
 
+/* prepares program:
+- checks if all arg are numbers
+- saves all elements in an array
+- if all elements come in a single arg it splits THEM
+- initializes stack a */
 int	ft_ps_prep(t_program *ps, int argc, char **argv)
 {
 	if (!(ft_check_int(ps, argc, argv)))

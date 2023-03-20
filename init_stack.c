@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:53:32 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 13:17:55 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:43:52 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static t_stack	*ft_find_next_max(t_program *ps, t_stack *max)
 	}
 	return (max);
 }
+
 
 static t_program	*ft_put_index(t_program *ps)
 {
@@ -94,6 +95,10 @@ static int	ft_ps_atoi(t_program *ps, const char *str)
 	return ((int)res * sig);
 }
 
+/* 	initializes stacka
+	- turns every element (char) to int and saves them in stacka
+	- checks doubles
+	- assigns an index to all elements */
 t_program	*ft_init_stacka(t_program *ps)
 {
 	ps->a = (t_stack *)malloc(sizeof(t_stack));
@@ -103,7 +108,6 @@ t_program	*ft_init_stacka(t_program *ps)
 	{
 		ps->a->num = ft_ps_atoi(ps, ps->argv[ps->i]);
 		ps->a->index = 0;
-		ps->a->pos = ps->i;
 		if (ps->argv[ps->i + 1] != NULL)
 		{
 			ps->a->next = (t_stack *)malloc(sizeof(t_stack));

@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:43:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 18:21:29 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:25:48 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_stack {
 	int				num;
@@ -39,24 +40,31 @@ typedef struct s_program {
 	struct s_stack	*b;
 }				t_program;
 
-// PREP
+
+// INIT
+t_program	*ft_init_stacka(t_program *ps);
 t_program	*ft_init_ps(t_program *ps);
 int			ft_ps_prep(t_program *ps, int argc, char **argv);
-int			ft_issorted(t_program *ps);
-void		ft_get_pos(t_program *ps);
-void		ft_get_target_pos(t_program *ps);
 
-// INIT STACK
-t_program	*ft_init_stacka(t_program *ps);
+// PUSH_SWAP
+int			ft_issorted(t_program *ps);
+void		ft_get_pos(t_stack *stack, t_program *ps);
+int			ft_get_target_pos(t_program *ps);
+void		ft_get_cost(t_program *ps);
+void		ft_next_action(t_program *ps);
 
 // ACTIONS
-t_stack		*ft_swap(t_stack *stack, char c);
 void		*ft_pb(t_program *ps);
-t_stack		*ft_r(t_stack *stack, char c);
-t_stack		*ft_rra(t_stack *stack, char c);
+void		*ft_pa(t_program *ps);
+t_stack		*ft_swap(t_stack *stack, char c, t_program *ps);
+t_stack		*ft_r(t_stack *stack, char c, t_program *ps);
+void		*ft_rr(t_program *ps);
+t_stack		*ft_revr(t_stack *stack, char c, t_program *ps);
+void		*ft_rrr(t_program *ps);
 
-// ERROR
+// UTILS
 void		ft_puterr(char *str, t_program *ps, int err);
-
+void		ft_putact(char *action, char c);
+int			ft_uns_cost(int cost);
 
 #endif

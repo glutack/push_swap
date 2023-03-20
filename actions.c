@@ -6,44 +6,28 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 13:57:02 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 12:57:45 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:26:53 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_putstr(char *action, char c)
-{
-	ft_putstr_fd(action, 1);
-	ft_putchar_fd(c, 1);
-	ft_putchar_fd('\n', 1);
-}
-
-t_stack	*ft_swap(t_stack *stack, char c)
+t_stack	*ft_swap(t_stack *stack, char c, t_program *ps)
 {
 	t_stack	*new_node;
 
 	new_node = stack->next;
 	stack->next = new_node->next;
 	new_node->next = stack;
-	ft_putstr("s", c);
+	if (c == 'a')
+		ps->a_first_node = ps->a;
+	else if (c == 'b')
+		ps->b_first_node = ps->b;
+	ft_putact("s", c);
 	return (new_node);
 }
 
-void	*ft_pb(t_program *ps)
-{
-	t_stack	*new_node;
-
-	new_node = ps->a;
-	ps->a = ps->a->next;
-	new_node->next = ps->b;
-	ps->b = new_node;
-	ps->b_first_node = ps->b;
-	ps->a_first_node = ps->a;
-	ft_putstr("p", 'b');
-}
-
-t_stack	*ft_r(t_stack *stack, char c)
+t_stack	*ft_r(t_stack *stack, char c, t_program *ps)
 {
 	t_stack	*first;
 	t_stack	*aux;
@@ -54,11 +38,27 @@ t_stack	*ft_r(t_stack *stack, char c)
 		stack = stack->next;
 	stack->next = aux;
 	stack->next->next = NULL;
-	ft_putstr("r", c);
+	if (c == 'a')
+		ps->a_first_node = ps->a;
+	else if (c == 'b')
+		ps->b_first_node = ps->b;
+	if (c == 'a' || c == 'b')
+		ft_putact("r", c);
 	return (first);
 }
 
-t_stack	*ft_rra(t_stack *stack, char c)
+/*	rotate a & rotate b*/
+void	*ft_rr(t_program *ps)
+{
+	ps->a = ft_r(ps->a, 'c', ps);
+	ps->a_first_node = ps->a;
+	ps->b = ft_r(ps->b, 'c', ps);
+	ps->b_first_node = ps->b;
+	ft_putact("r", 'r');
+}
+
+/*	reverse rotate a single stack */
+t_stack	*ft_revr(t_stack *stack, char c, t_program *ps)
 {
 	t_stack	*first;
 	t_stack	*aux;
@@ -71,7 +71,21 @@ t_stack	*ft_rra(t_stack *stack, char c)
 	stack->next = first;
 	first = stack;
 	aux->next = NULL;
-	ft_putstr("rr", c);
+	if (c == 'a')
+		ps->a_first_node = ps->a;
+	else if (c == 'b')
+		ps->b_first_node = ps->b;
+	if (c == 'a' || c == 'b')
+		ft_putact("rr", c);
 	return (first);
 }
 
+/*	reverse rotate a & reverse rotate b */
+void	*ft_rrr(t_program *ps)
+{
+	ps->a = ft_revr(ps->a, 'c', ps);
+	ps->a_first_node = ps->a;
+	ps->b = ft_revr(ps->b, 'c', ps);
+	ps->b_first_node = ps->b;
+	ft_putact("rr", 'r');
+}

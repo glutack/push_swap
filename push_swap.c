@@ -6,44 +6,57 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/14 18:22:01 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:26:25 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*	sorts up to 3 elements in stack a depending on its indexes */
 void	ft_sort_small(t_program *ps)
 {
-	if (ps->total_index == 2)
-		ps->a = ft_swap(ps->a, 'a');
-	else if (ps->a->index > ps->a->next->index
-		&& ps->a->index > ps->a->next->next->index)
-		ps->a = ft_r(ps->a, 'a');
-	else if (ps->a->next->index > (ps->a->index && ps->a->next->next->index))
-		ps->a = ft_rra(ps->a, 'a');
-	else if (ps->a->index > ps->a->next->index)
-		ps->a = ft_swap(ps->a, 'a');
-	ps->a_first_node = ps->a;
+	while (!ft_issorted(ps))
+	{
+		if (ps->a->index > ps->a->next->index
+			&& ps->a->index > ps->a->next->next->index)
+			ps->a = ft_r(ps->a, 'a', ps);
+		else if (ps->a->next->index > ps->a->index
+			&& ps->a->next->index > ps->a->next->next->index)
+			ps->a = ft_revr(ps->a, 'a', ps);
+		else if (ps->a->index > ps->a->next->index)
+			ps->a = ft_swap(ps->a, 'a', ps);
+	}
 }
 
+/* */
 void	ft_sort_big(t_program *ps)
 {
 	while (ps->a->next->next->next != NULL)
 		ft_pb(ps);
-	ft_sort_small(ps);
-	ps->aux_pos = ps->a_first_node;
-	ft_get_target_pos(ps);
 	while (ps->b != NULL)
 	{
-		ft_putnbr_fd(ps->a->target_pos, 1);
-		ft_putchar_fd('\n', 1);
-		ps->b = ps->b->next;
+		ft_get_pos(ps->a, ps);
+		ft_get_pos(ps->b, ps);
+		ft_sort_small(ps);
+		while (ps->b != NULL)
+		{
+			ps->b->target_pos = ft_get_target_pos(ps);
+			ft_putnbr_fd(ps->b->num, 1);
+			ft_putnbr_fd(ps->b->pos, 1);
+			ps->b = ps->b->next;
+		}
+		ps->b = ps->b_first_node;
+		ft_get_cost(ps);
+		ft_next_action(ps);
 	}
 }
 
-/*If first arg contains all numbers, it splits them into different str, if
-numbers already come as different args it deletes the first one (./push_swap)
-and allocates memory*/
+/*	allocates memory for t_program ps, structure where we're going to keep
+	all of our lists and auxs.
+	- If program isn't sent any elements, or preparation of the program goes
+	wrong, it returns control to the user.
+	- If stacka isn't sorted and program gets <= 3 elements, sort_small
+	- If stacka isn't sorted and program gets >= 4 elements, sort_big */
 int	main(int argc, char **argv)
 {
 	t_program	*ps;
