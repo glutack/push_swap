@@ -6,14 +6,14 @@
 #    By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 13:25:49 by irmoreno          #+#    #+#              #
-#    Updated: 2023/03/21 12:30:36 by irmoreno         ###   ########.fr        #
+#    Updated: 2023/03/22 18:06:43 by irmoreno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #-------- push_swap --------#
 NAME	=	push_swap
 SRC		=	push_swap.c push_swap_prep.c init_stack.c actions.c positions.c\
-			push.c error.c
+			push.c utils.c do_actions.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#

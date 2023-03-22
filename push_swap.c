@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 15:45:34 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:44:04 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ void	ft_sort_small(t_program *ps)
 	}
 }
 
-/* */
+/*	sorts +3 elements: sends all elements to pb except 3 (and sorts them), 
+	gets each element position in both stacks, next it gets all target positions
+	for elements in stack b, then it gets the number of moves (cost) each
+	element will need to get to the target position for ft_next_action to decide
+	which actions will be done depending on the minimum cost */
 void	ft_sort_big(t_program *ps)
 {
 	while (ps->a->next->next->next != NULL)
@@ -64,19 +68,15 @@ int	main(int argc, char **argv)
 	ps = NULL;
 	ps = ft_init_ps(ps);
 	if (argc <= 1 || (!ft_ps_prep(ps, argc, argv)))
+	{
+		free(ps);
 		return (1);
+	}
 	else if (!ft_issorted(ps) && ps->total_index <= 3)
 		ft_sort_small(ps);
 	else if (!ft_issorted(ps) && ps->total_index >= 4)
 		ft_sort_big(ps);
-	ft_putnbr_fd(ps->a_first_node->num, 1);
-	ps->a = ps->a_first_node;
-	while (ps->a != NULL)
-	{
-		ft_putnbr_fd(ps->a->num, 1);
-		ps->a = ps->a->next;
-	}
-	ft_putstr_fd("tot be\n", 1);
+	ft_free_stack(ps->a);
 	free(ps);
 	return (0);
 }

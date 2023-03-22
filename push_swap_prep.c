@@ -6,13 +6,13 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:44:44 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/21 12:48:24 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:58:05 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//checks if arg != int
+// checks if arg != int
 static int	ft_check_int(t_program *ps, char **argv)
 {
 	ps->i = 1;
@@ -50,17 +50,19 @@ t_program	*ft_init_ps(t_program *ps)
 /* prepares program:
 - checks if all arg are numbers
 - saves all elements in an array
-- if all elements come in a single arg it splits THEM
+- if all elements come in a single arg it splits them
 - initializes stack a */
 int	ft_ps_prep(t_program *ps, int argc, char **argv)
 {
 	if (!(ft_check_int(ps, argv)))
-		ft_puterr("Error\nIllegal argument", ps, 0);
+		ft_puterr("Error\nIllegal argument", ps, 1);
 	if (argc == 2)
 		ps->argv = ft_split(argv[1], ' ');
 	else
 	{
 		ps->argv = (char **)malloc(argc * sizeof(char *));
+		if (!ps->argv)
+			ft_puterr("Error\nFailed memory allocation", ps, 1);
 		ps->i = 1;
 		ps->j = 0;
 		while (argv[ps->i])
@@ -68,7 +70,5 @@ int	ft_ps_prep(t_program *ps, int argc, char **argv)
 		ps->argv[ps->j] = NULL;
 	}
 	ft_init_stacka(ps);
-	if (!ps)
-		ft_puterr("Error\nFailed memory allocation", ps, 2);
 	return (1);
 }

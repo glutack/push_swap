@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:53:32 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/20 18:43:52 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:00:21 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static t_stack	*ft_find_next_max(t_program *ps, t_stack *max)
 	}
 	return (max);
 }
-
 
 static t_program	*ft_put_index(t_program *ps)
 {
@@ -102,6 +101,8 @@ static int	ft_ps_atoi(t_program *ps, const char *str)
 t_program	*ft_init_stacka(t_program *ps)
 {
 	ps->a = (t_stack *)malloc(sizeof(t_stack));
+	if (!ps->a)
+		ft_puterr("Error\nFailed memory allocation", ps, 1);
 	ps->a_first_node = ps->a;
 	ps->i = 0;
 	while (ps->argv[ps->i] != NULL)

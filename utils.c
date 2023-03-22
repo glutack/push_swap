@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:58:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 15:30:48 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:07:00 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	ft_free_stack(t_stack *stack)
+{
+	t_stack	*aux;
+
+	if (!stack)
+		return ;
+	while (stack)
+	{
+		aux = stack->next;
+		free(stack);
+		stack = aux;
+	}
+}
+
 void	ft_puterr(char *str, t_program *ps, int err)
 {
+	if (err == 1)
+		free(ps->argv);
+	if (ps->a != NULL)
+		ft_free_stack(ps->a);
+	if (ps->b != NULL)
+		ft_free_stack(ps->b);
+	free(ps);
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd('\n', 1);
-	if (err > 0)
-	{
-		if (err == 1)
-			free(ps->argv);
-		//free ps->a
-	}
-	free(ps);
 	exit (1);
 }
 
