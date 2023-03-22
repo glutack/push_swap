@@ -6,14 +6,14 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:44:44 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/20 18:43:19 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:48:24 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 //checks if arg != int
-static int	ft_check_int(t_program *ps, int argc, char **argv)
+static int	ft_check_int(t_program *ps, char **argv)
 {
 	ps->i = 1;
 	ps->j = 0;
@@ -54,7 +54,7 @@ t_program	*ft_init_ps(t_program *ps)
 - initializes stack a */
 int	ft_ps_prep(t_program *ps, int argc, char **argv)
 {
-	if (!(ft_check_int(ps, argc, argv)))
+	if (!(ft_check_int(ps, argv)))
 		ft_puterr("Error\nIllegal argument", ps, 0);
 	if (argc == 2)
 		ps->argv = ft_split(argv[1], ' ');

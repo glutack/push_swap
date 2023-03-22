@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/20 21:26:25 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:45:34 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ void	ft_sort_big(t_program *ps)
 {
 	while (ps->a->next->next->next != NULL)
 		ft_pb(ps);
+	ft_sort_small(ps);
 	while (ps->b != NULL)
 	{
-		ft_get_pos(ps->a, ps);
-		ft_get_pos(ps->b, ps);
-		ft_sort_small(ps);
+		ps->a = ft_get_pos(ps->a, ps);
+		ps->b = ft_get_pos(ps->b, ps);
 		while (ps->b != NULL)
 		{
 			ps->b->target_pos = ft_get_target_pos(ps);
-			ft_putnbr_fd(ps->b->num, 1);
-			ft_putnbr_fd(ps->b->pos, 1);
 			ps->b = ps->b->next;
 		}
 		ps->b = ps->b_first_node;
 		ft_get_cost(ps);
 		ft_next_action(ps);
 	}
+	while (ps->a->index != 1)
+		ps->a = ft_revr(ps->a, 'a', ps);
 }
 
 /*	allocates memory for t_program ps, structure where we're going to keep
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	else if (!ft_issorted(ps) && ps->total_index >= 4)
 		ft_sort_big(ps);
 	ft_putnbr_fd(ps->a_first_node->num, 1);
+	ps->a = ps->a_first_node;
 	while (ps->a != NULL)
 	{
 		ft_putnbr_fd(ps->a->num, 1);

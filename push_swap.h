@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:43:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/20 21:25:48 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:55:49 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct s_stack {
 
 typedef struct s_program {
 	char			**argv;
-	unsigned int	i;
-	unsigned int	j;
+	int				i;
+	int				j;
 	unsigned int	total_index;
 	struct s_stack	*aux_pos;
 	struct s_stack	*a_first_node;
@@ -48,19 +48,19 @@ int			ft_ps_prep(t_program *ps, int argc, char **argv);
 
 // PUSH_SWAP
 int			ft_issorted(t_program *ps);
-void		ft_get_pos(t_stack *stack, t_program *ps);
+t_stack		*ft_get_pos(t_stack *stack, t_program *ps);
 int			ft_get_target_pos(t_program *ps);
 void		ft_get_cost(t_program *ps);
 void		ft_next_action(t_program *ps);
 
 // ACTIONS
-void		*ft_pb(t_program *ps);
-void		*ft_pa(t_program *ps);
+void		ft_pb(t_program *ps);
+void		ft_pa(t_program *ps);
 t_stack		*ft_swap(t_stack *stack, char c, t_program *ps);
 t_stack		*ft_r(t_stack *stack, char c, t_program *ps);
-void		*ft_rr(t_program *ps);
+void		ft_rr(t_program *ps);
 t_stack		*ft_revr(t_stack *stack, char c, t_program *ps);
-void		*ft_rrr(t_program *ps);
+void		ft_rrr(t_program *ps);
 
 // UTILS
 void		ft_puterr(char *str, t_program *ps, int err);

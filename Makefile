@@ -6,21 +6,21 @@
 #    By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 13:25:49 by irmoreno          #+#    #+#              #
-#    Updated: 2023/03/20 21:08:37 by irmoreno         ###   ########.fr        #
+#    Updated: 2023/03/21 12:30:36 by irmoreno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #-------- push_swap --------#
 NAME	=	push_swap
 SRC		=	push_swap.c push_swap_prep.c init_stack.c actions.c positions.c\
-			actions_specific.c error.c
+			push.c error.c
 OBJ		=	$(SRC:.c=.o)
 
 #--------- library ---------#
 LIBFT	=	./libft/libft.a
 
 #---------- other ----------#
-//CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f
 
 #---------- rules ----------#
