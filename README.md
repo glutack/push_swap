@@ -1,7 +1,4 @@
-# push_swap <> | -/-/-
-<p align="center">
-  ![push_swap](../badges/push_swap.png)
-</p>
+![push_swap](../badges/push_swap.png)
 
 `push_swap` is an algorithm project whose objective is to sort x amount of int elements with the minimun possible number of operations. The program is only allowed to work with two stacks (stack A and stack B) and use the following actions:
 
