@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:58:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 18:07:00 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:46:15 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,20 @@ void	ft_free_stack(t_stack *stack)
 
 void	ft_puterr(char *str, t_program *ps, int err)
 {
-	if (err == 1)
+	if (ps->argc == 2 && err == 1)
+		ft_free_split(ps->argv);
+	if (err >= 1)
 		free(ps->argv);
-	if (ps->a != NULL)
+	if (err > 1 && ps->a)
+	{
+		ps->a = ps->a_first_node;
 		ft_free_stack(ps->a);
-	if (ps->b != NULL)
+	}
+	if (err > 1 && ps->b)
+	{
+		ps->b = ps->b_first_node;
 		ft_free_stack(ps->b);
+	}
 	free(ps);
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd('\n', 1);

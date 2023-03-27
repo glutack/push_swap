@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:53:32 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 18:00:21 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:51:30 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	ft_ps_atoi(t_program *ps, const char *str)
 		str++;
 	}
 	if ((res * sig) < -2147483648 || (sig == 1 && res > 2147483647))
-		ft_puterr("Error\nNumber > || < than int in arg", ps, 1);
+		ft_puterr("Error\nNumber > || < than int in arg", ps, 2);
 	return ((int)res * sig);
 }
 
@@ -102,7 +102,7 @@ t_program	*ft_init_stacka(t_program *ps)
 {
 	ps->a = (t_stack *)malloc(sizeof(t_stack));
 	if (!ps->a)
-		ft_puterr("Error\nFailed memory allocation", ps, 1);
+		ft_puterr("Error\nFailed memory allocation", ps, 2);
 	ps->a_first_node = ps->a;
 	ps->i = 0;
 	while (ps->argv[ps->i] != NULL)
@@ -112,12 +112,13 @@ t_program	*ft_init_stacka(t_program *ps)
 		if (ps->argv[ps->i + 1] != NULL)
 		{
 			ps->a->next = (t_stack *)malloc(sizeof(t_stack));
+			if (!ps->a)
+				ft_puterr("Error\nFailed memory allocation", ps, 2);
 			ps->a = ps->a->next;
 		}
 		ps->i++;
 	}
 	ps->total_index = ps->i;
-	free(ps->argv);
 	ps->a->next = NULL;
 	ps->a = ps->a_first_node;
 	ps = ft_check_double(ps);

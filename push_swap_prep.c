@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:44:44 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 17:58:05 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:44:37 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_program	*ft_init_ps(t_program *ps)
 	ps = (t_program *)malloc(sizeof(t_program));
 	if (!ps)
 	{
+		free(ps);
 		ft_putstr_fd("Error\nFailed memory allocation", 2);
 		exit (1);
 	}
@@ -52,17 +53,18 @@ t_program	*ft_init_ps(t_program *ps)
 - saves all elements in an array
 - if all elements come in a single arg it splits them
 - initializes stack a */
-int	ft_ps_prep(t_program *ps, int argc, char **argv)
+void	ft_ps_prep(t_program *ps, int argc, char **argv)
 {
+	ps->argc = argc;
 	if (!(ft_check_int(ps, argv)))
-		ft_puterr("Error\nIllegal argument", ps, 1);
+		ft_puterr("Error\nIllegal argument", ps, 0);
 	if (argc == 2)
 		ps->argv = ft_split(argv[1], ' ');
 	else
 	{
 		ps->argv = (char **)malloc(argc * sizeof(char *));
 		if (!ps->argv)
-			ft_puterr("Error\nFailed memory allocation", ps, 1);
+			ft_puterr("Error\nFailed memory allocation", ps, 0);
 		ps->i = 1;
 		ps->j = 0;
 		while (argv[ps->i])
@@ -70,5 +72,8 @@ int	ft_ps_prep(t_program *ps, int argc, char **argv)
 		ps->argv[ps->j] = NULL;
 	}
 	ft_init_stacka(ps);
-	return (1);
+	if (argc == 2)
+		ft_free_split(ps->argv);
+	else
+		free(ps->argv);
 }

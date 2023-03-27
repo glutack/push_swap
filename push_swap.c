@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/22 17:44:04 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:48:03 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,25 @@ int	main(int argc, char **argv)
 
 	ps = NULL;
 	ps = ft_init_ps(ps);
-	if (argc <= 1 || (!ft_ps_prep(ps, argc, argv)))
+	if (argc == 1)
 	{
 		free(ps);
 		return (1);
 	}
+	ft_ps_prep(ps, argc, argv);
+	if (ps->total_index == 1)
+	{
+		ft_free_stack(ps->a);
+		free(ps);
+		return (1);
+	}
+	else if (!ft_issorted(ps) && ps->total_index == 2)
+		ft_swap(ps->a, 'a', ps);
 	else if (!ft_issorted(ps) && ps->total_index <= 3)
 		ft_sort_small(ps);
 	else if (!ft_issorted(ps) && ps->total_index >= 4)
 		ft_sort_big(ps);
+	ps->a = ps->a_first_node;
 	ft_free_stack(ps->a);
 	free(ps);
 	return (0);
