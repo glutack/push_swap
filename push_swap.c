@@ -6,11 +6,29 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:10:17 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/27 09:48:03 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:59:56 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/* checks if the indexes in stack a are already sorted, if they're it returns 1,
+else it returns 0 */
+int	ft_issorted(t_program *ps)
+{
+	ps->i = 1;
+	while (ps->a->next != NULL)
+	{
+		if (ps->a->index > ps->a->next->index)
+		{
+			ps->a = ps->a_first_node;
+			return (0);
+		}
+		ps->a = ps->a->next;
+	}
+	ps->a = ps->a_first_node;
+	return (1);
+}
 
 /*	sorts up to 3 elements in stack a depending on its indexes */
 void	ft_sort_small(t_program *ps)
@@ -73,13 +91,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_ps_prep(ps, argc, argv);
-	if (ps->total_index == 1)
-	{
-		ft_free_stack(ps->a);
-		free(ps);
-		return (1);
-	}
-	else if (!ft_issorted(ps) && ps->total_index == 2)
+	if (!ft_issorted(ps) && ps->total_index == 2)
 		ft_swap(ps->a, 'a', ps);
 	else if (!ft_issorted(ps) && ps->total_index <= 3)
 		ft_sort_small(ps);

@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:43:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/25 09:53:29 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:54:47 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void		ft_free_stack(t_stack *stack);
 void		ft_puterr(char *str, t_program *ps, int err);
 void		ft_putact(char *action, char c);
 int			ft_uns_cost(int cost);
+int			ft_ps_atoi(t_program *ps, const char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:53:32 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/27 09:51:30 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:58:22 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,41 +69,8 @@ static t_program	*ft_check_double(t_program *ps)
 	return (ps);
 }
 
-static int	ft_ps_atoi(t_program *ps, const char *str)
+static t_program	*ft_fill_stacka(t_program *ps)
 {
-	int		sig;
-	long	res;
-
-	sig = 1;
-	res = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sig = -1;
-		str++;
-	}
-	while (ft_isdigit(*str))
-	{
-		res = res * 10 + (*str - '0');
-		str++;
-	}
-	if ((res * sig) < -2147483648 || (sig == 1 && res > 2147483647))
-		ft_puterr("Error\nNumber > || < than int in arg", ps, 2);
-	return ((int)res * sig);
-}
-
-/* 	initializes stacka
-	- turns every element (char) to int and saves them in stacka
-	- checks doubles
-	- assigns an index to all elements */
-t_program	*ft_init_stacka(t_program *ps)
-{
-	ps->a = (t_stack *)malloc(sizeof(t_stack));
-	if (!ps->a)
-		ft_puterr("Error\nFailed memory allocation", ps, 2);
-	ps->a_first_node = ps->a;
 	ps->i = 0;
 	while (ps->argv[ps->i] != NULL)
 	{
@@ -121,6 +88,20 @@ t_program	*ft_init_stacka(t_program *ps)
 	ps->total_index = ps->i;
 	ps->a->next = NULL;
 	ps->a = ps->a_first_node;
+	return (ps);
+}
+
+/* 	initializes stacka
+	- turns every element (char) to int and saves them in stacka
+	- checks doubles
+	- assigns an index to all elements */
+t_program	*ft_init_stacka(t_program *ps)
+{
+	ps->a = (t_stack *)malloc(sizeof(t_stack));
+	if (!ps->a)
+		ft_puterr("Error\nFailed memory allocation", ps, 2);
+	ps->a_first_node = ps->a;
+	ps = ft_fill_stacka(ps);
 	ps = ft_check_double(ps);
 	ps = ft_put_index(ps);
 	ps->a = ps->a_first_node;

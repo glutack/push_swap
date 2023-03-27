@@ -6,7 +6,7 @@
 /*   By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 12:58:19 by irmoreno          #+#    #+#             */
-/*   Updated: 2023/03/27 09:46:15 by irmoreno         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:55:47 by irmoreno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,34 @@ void	ft_putact(char *action, char c)
 	ft_putchar_fd('\n', 1);
 }
 
-/* checks if the indexes in stack a are already sorted, if they're it returns 1,
-else it returns 0 */
-int	ft_issorted(t_program *ps)
-{
-	ps->i = 1;
-	while (ps->a->next != NULL)
-	{
-		if (ps->a->index > ps->a->next->index)
-		{
-			ps->a = ps->a_first_node;
-			return (0);
-		}
-		ps->a = ps->a->next;
-	}
-	ps->a = ps->a_first_node;
-	return (1);
-}
-
 int	ft_uns_cost(int cost)
 {
 	if (cost < 0)
 		return (cost * -1);
 	return (cost);
+}
+
+int	ft_ps_atoi(t_program *ps, const char *str)
+{
+	int		sig;
+	long	res;
+
+	sig = 1;
+	res = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sig = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	if ((res * sig) < -2147483648 || (sig == 1 && res > 2147483647))
+		ft_puterr("Error\nNumber > || < than int in arg", ps, 2);
+	return ((int)res * sig);
 }
