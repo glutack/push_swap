@@ -1,4 +1,6 @@
-<p align="center">![push_swap](https://github.com/glutack/glutack/blob/master/42img/push_swap_banner.png?raw=true)</p>
+<p align="center">
+![push_swap](https://github.com/glutack/glutack/blob/master/42img/push_swap_banner.png?raw=true)
+</p>
 
 `push_swap` is an algorithm project whose objective is to sort x amount of int elements with the minimun possible number of operations. The program is only allowed to work with two stacks (stack A and stack B) and use the following actions:
 
