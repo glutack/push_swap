@@ -6,7 +6,7 @@
 #    By: irmoreno <irmoreno@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 13:25:49 by irmoreno          #+#    #+#              #
-#    Updated: 2023/03/22 18:06:43 by irmoreno         ###   ########.fr        #
+#    Updated: 2023/03/29 14:02:29 by irmoreno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(LIBFT):
 	@gcc -g $(CFLAGS) -c $(SRC)
 	@echo "objetos creados :D"
 
-$(NAME): $(OBJ) $(LIBMLX) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT)
 	@gcc -g $(CFLAGS) $(OBJ) -Llibft -lft -o $(NAME)
 	@echo "push_swap creado :D"
 
