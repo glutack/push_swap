@@ -34,4 +34,4 @@
 ## to fix
 
 ---
-banner by me
+banner by @ me
